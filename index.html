@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Yağmur, beni seviyor musun?</title>
+<title>İrem, beni seviyor musun?</title>
 <style>
 :root{--bg:#fff0f5;--fg:#5b1a38;--yes:#e91e63;--no:#8a8a99;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0f1c;--fg:#ffd6e6;--yes:#ff4f8b;--no:#6b6b7c}}
@@ -23,7 +23,7 @@ button{font-size:20px;border:0;border-radius:999px;padding:14px 30px;color:#fff;
 </head>
 <body>
 <div class="heart" id="heart">💗</div>
-<h1 id="q">Yağmur, beni seviyor musun?</h1>
+<h1 id="q">İrem, beni seviyor musun?</h1>
 <div class="row">
   <button id="yes">Evet 💖</button>
   <button id="no">Hayır</button>
@@ -31,13 +31,13 @@ button{font-size:20px;border:0;border-radius:999px;padding:14px 30px;color:#fff;
 <script>
 var yes=document.getElementById('yes'),no=document.getElementById('no'),q=document.getElementById('q'),heart=document.getElementById('heart');
 var n=0;
-var texts=["Hayır","Emin misin?","Bir daha düşün","Yakala beni 😜","Basamazsın!","Vazgec","Son şansın"];
+var texts=["Hayır","Emin misin?","Bir daha düşün","Yakala beni 😜","Basamazsın!","Vazgeç","Son şansın"];
 no.addEventListener('click',function(){
   n++;
-  if(n===1) return; // ilk basışta tepki yok
+  if(n===1) return;
   if(n>=8){
     no.style.display='none';
-    q.textContent='Yağmur, başka seçeneğin kalmadı 😌';
+    q.textContent='İrem, başka seçeneğin kalmadı 😛';
     yes.style.transform='scale(2.2)';
     return;
   }
@@ -49,7 +49,7 @@ no.addEventListener('click',function(){
   yes.style.transform='scale('+(1+n*0.15)+')';
 });
 yes.addEventListener('click',function(){
-  q.textContent='Biliyordum Yağmur! 💖';
+  q.textContent='Biliyordum İrem! 💖';
   no.style.display='none';
   yes.style.display='none';
   heart.style.fontSize='120px';
