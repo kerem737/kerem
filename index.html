@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yağmur, beni seviyor musun?</title>
+<style>
+:root{--bg:#fff0f5;--fg:#5b1a38;--yes:#e91e63;--no:#8a8a99;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0f1c;--fg:#ffd6e6;--yes:#ff4f8b;--no:#6b6b7c}}
+:root[data-theme="dark"]{--bg:#2a0f1c;--fg:#ffd6e6;--yes:#ff4f8b;--no:#6b6b7c}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.heart{font-size:84px;animation:beat 1s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+h1{font-size:28px;margin:12px 20px 28px}
+.row{display:flex;gap:18px;align-items:center;justify-content:center}
+button{font-size:20px;border:0;border-radius:999px;padding:14px 30px;color:#fff;cursor:pointer;transition:transform .25s,left .25s,top .25s}
+#yes{background:var(--yes);box-shadow:0 6px 18px rgba(233,30,99,.4)}
+#no{background:var(--no)}
+.fall{position:fixed;top:-40px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="heart" id="heart">💗</div>
+<h1 id="q">Yağmur, beni seviyor musun?</h1>
+<div class="row">
+  <button id="yes">Evet 💖</button>
+  <button id="no">Hayır</button>
+</div>
+<script>
+var yes=document.getElementById('yes'),no=document.getElementById('no'),q=document.getElementById('q'),heart=document.getElementById('heart');
+var n=0;
+var texts=["Hayır","Emin misin?","Bir daha düşün","Yakala beni 😜","Basamazsın!","Yapma ama 🥺","Son şansın"];
+no.addEventListener('click',function(){
+  n++;
+  if(n===1) return; // ilk basışta tepki yok
+  if(n>=8){
+    no.style.display='none';
+    q.textContent='Yağmur, başka seçeneğin kalmadı 😌';
+    yes.style.transform='scale(2.2)';
+    return;
+  }
+  no.textContent=texts[Math.min(n-1,texts.length-1)];
+  no.style.position='fixed';
+  var w=no.offsetWidth,h=no.offsetHeight;
+  no.style.left=Math.random()*(innerWidth-w-20)+10+'px';
+  no.style.top=Math.random()*(innerHeight-h-20)+10+'px';
+  yes.style.transform='scale('+(1+n*0.15)+')';
+});
+yes.addEventListener('click',function(){
+  q.textContent='Biliyordum Yağmur! 💖';
+  no.style.display='none';
+  yes.style.display='none';
+  heart.style.fontSize='120px';
+  var e=['💖','💗','💕','❤️','💘'];
+  for(var i=0;i<60;i++){
+    (function(i){setTimeout(function(){
+      var s=document.createElement('div');
+      s.className='fall';
+      s.textContent=e[i%e.length];
+      s.style.left=Math.random()*100+'vw';
+      s.style.fontSize=20+Math.random()*30+'px';
+      s.style.animationDuration=2+Math.random()*3+'s';
+      document.body.appendChild(s);
+      setTimeout(function(){s.remove()},5500);
+    },i*80)})(i);
+  }
+});
+</script>
+</body>
+</html>
