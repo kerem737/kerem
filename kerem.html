@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naz, sana bir mesajım var</title>
+<style>
+:root{--bg:#fff0f5;--fg:#5b1a38;--env:#e8557f;--env2:#d9456f;--paper:#fffdf8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0f1c;--fg:#ffd6e6;--env:#ff4f8b;--env2:#e63d77;--paper:#fff4f8}}
+:root[data-theme="dark"]{--bg:#2a0f1c;--fg:#ffd6e6;--env:#ff4f8b;--env2:#e63d77;--paper:#fff4f8}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+h1{font-size:26px;margin:0 20px 150px}
+.env{position:relative;width:270px;height:180px;background:var(--env);border-radius:8px;cursor:pointer;perspective:800px;animation:wiggle 2s infinite}
+.env.open{animation:none}
+@keyframes wiggle{0%,100%{transform:rotate(0)}5%{transform:rotate(-3deg)}10%{transform:rotate(3deg)}15%{transform:rotate(0)}}
+.letter{position:absolute;left:15px;right:15px;bottom:10px;height:160px;background:var(--paper);border-radius:6px;padding:16px;box-sizing:border-box;color:#5b1a38;font-size:17px;line-height:1.4;z-index:2;transition:transform .8s ease .3s;display:flex;align-items:center;justify-content:center}
+.env.open .letter{transform:translateY(-130px)}
+.front{position:absolute;inset:0;background:var(--env2);clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);border-radius:8px;z-index:3}
+.flap{position:absolute;top:0;left:0;width:100%;height:100px;background:var(--env);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .4s ease;z-index:4}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.hint{margin-top:28px;font-size:16px;opacity:.8}
+.fall{position:fixed;top:-40px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+<h1>Naz, sana bir mesajım var 💌</h1>
+<div class="env" id="env">
+  <div class="letter">Seni iyi ki tanıdım Naz. Her günüm seninle daha güzel 💖</div>
+  <div class="front"></div>
+  <div class="flap"></div>
+</div>
+<div class="hint" id="hint">Zarfa dokun</div>
+<script>
+var env=document.getElementById('env'),hint=document.getElementById('hint');
+var opened=false;
+env.addEventListener('click',function(){
+  if(opened) return;
+  opened=true;
+  env.classList.add('open');
+  hint.textContent='';
+  var e=['💖','💗','💕','❤️','💘'];
+  for(var i=0;i<40;i++){
+    (function(i){setTimeout(function(){
+      var s=document.createElement('div');
+      s.className='fall';
+      s.textContent=e[i%e.length];
+      s.style.left=Math.random()*100+'vw';
+      s.style.fontSize=20+Math.random()*30+'px';
+      s.style.animationDuration=2+Math.random()*3+'s';
+      document.body.appendChild(s);
+      setTimeout(function(){s.remove()},5500);
+    },700+i*100)})(i);
+  }
+});
+</script>
+</body>
+</html>
